@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-tp-app
+  labels:
+    app: k8s-tp-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: k8s-tp-app
+  template:
+    metadata:
+      labels:
+        app: k8s-tp-app
+    spec:
+      containers:
+        - name: k8s-tp-app
+          image: k8s-tp-app:1.0.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: db-password
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config
