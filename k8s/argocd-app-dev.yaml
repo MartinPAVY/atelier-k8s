@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/MartinPAVY/k8s-gitops-tp.git
+    repoURL: https://github.com/MartinPAVY/atelier-k8s.git
     targetRevision: main
     path: k8s/overlays/dev
   destination:
