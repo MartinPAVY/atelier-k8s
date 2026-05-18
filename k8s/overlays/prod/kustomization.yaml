@@ -4,3 +4,4 @@ bases:
   - ../../base
 patches:
   - path: configmap-patch.yaml
+  - path: service-patch.yaml
